@@ -10,9 +10,22 @@ router.get('/', function (req, res, next) {
 
 router.get('/ticket/list', async function (req, res, next) {
   var list = await getQuery("select * from ticket");
-  console.log("----------------------");
-  console.log(list);
-  console.log("---------end-------------");
+  return res.json(list);
+});
+
+
+router.get('/ticket/:id', async function (req, res, next) {
+  const id = req.params.id;
+
+  var list = await getQuery("select * from ticket where id=" + id);
+  return res.json(list);
+});
+
+
+router.get('/test/:id', async function (req, res, next) {
+  const id = req.params.id;
+
+  var list = await getQuery("select * from ticket where id=" + id);
   return res.json(list);
 });
 
