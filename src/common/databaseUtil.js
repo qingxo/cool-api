@@ -6,6 +6,7 @@ function getConnect() {
         host: '127.0.0.1',
         user: 'root',
         password: 'My-World-2020',
+        protocol: 'tcp',
         database: 'cool'
     })
 
