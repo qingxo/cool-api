@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
+const app = require('../app');
 
 
 /* GET home page. */
@@ -72,7 +73,24 @@ router.post('/upload', (req, res) => {
       data: '上传成功'
     })
   });
+});
 
+router.get('/download/:name', (req, res) => {
+  const fileName = req.params.name;
+  const file = {
+    name: fileName,
+    path: path.join(__dirname, '../public/upload') + '/' + fileName,
+  }
+  let isExist = fs.existsSync(path.resolve(file.path));
+
+  if (isExist) {
+    res.download(file.path);
+  } else {
+    res.send({
+      code: 1,
+      msg: 'file not exist'
+    })
+  }
 
 });
 
