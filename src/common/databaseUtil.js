@@ -20,9 +20,6 @@ function getQuery(sql) {
     return new Promise((resolve, reject) => {
         connection.query(sql, (err, results, fields) => {
             if (err) reject(err);
-            console.log("---------the results-------");
-            console.log(results);
-            console.log("-----------end------------")
             resolve(results);
         }
         )
