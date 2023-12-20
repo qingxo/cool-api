@@ -1,13 +1,14 @@
 var mysql = require('mysql');
+var info = require('dotenv').config();
 let connection = null;
-
 function getConnect() {
+    const { HOST_IP, MYSQL_PWD, DATABASE_NAME, MYSQL_NAME } = info?.parsed;
     connection = mysql.createConnection({
-        host: '127.0.0.1',
-        user: 'root',
-        password: 'My-World-2020',
+        host: HOST_IP,
+        user: MYSQL_NAME,
+        password: MYSQL_PWD,
         protocol: 'tcp',
-        database: 'cool'
+        database: DATABASE_NAME,
     })
 
     connection.connect()
