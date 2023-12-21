@@ -17,7 +17,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 //[/^\/api.*/]
-app.use(expressjwt({ secret: MAGIIC_WORDS, algorithms: ["HS256"] }).unless({ path: [/^\/api\//, /^\/test\//] }))
 // app.use(jwtMiddleware.authJwt());
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(expressjwt({ secret: MAGIIC_WORDS, algorithms: ["HS256"] }).unless({ path: [/^\/api\//, /^\/test\//] }))
 app.use('/api', indexRouter);
 app.use('/users', usersRouter);
 app.use('/test', testRouter);
